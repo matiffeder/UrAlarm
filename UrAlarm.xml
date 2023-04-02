@@ -1,0 +1,136 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.runewaker.com/UI.xsd">
+	<CheckButton name="UrAlarmTemp" inherits="UIPanelCheckButtonTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="25" y="25"/>
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentName" inherits="GameFontNormal" justifyH="LEFT">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</CheckButton>
+	<Frame name="UrAlarmGUI" parent="UIParent" inherits="UICommonFrameTemplate" hidden="true" frameLevel="1">
+		<Size>
+			<AbsDimension x="270" y="170"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER"/>
+		</Anchors>
+		<Frames>
+			<CheckButton name="$parentAlarm" inherits="UrAlarmTemp">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="25" y="35"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<EditBox name="$parentATime" inherits="UIPanelEditBoxTemplate" numeric="true" letters="6">
+				<Size>
+					<AbsDimension x="58" y="18"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="180" y="38"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentName" inherits="GameFontHighlight" justifyH="LEFT">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</EditBox>
+			<CheckButton name="$parentRepeat" inherits="UrAlarmTemp">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="25" y="60"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<EditBox name="$parentRTime" inherits="UIPanelEditBoxTemplate" numeric="true">
+				<Size>
+					<AbsDimension x="35" y="18"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="180" y="63"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Layers>
+					<Layer>
+						<FontString name="$parentName" inherits="GameFontHighlight" justifyH="LEFT">
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</EditBox>
+			<CheckButton name="$parentHourly" inherits="UrAlarmTemp">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="25" y="85"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parentHalfH" inherits="UrAlarmTemp">
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="25" y="110"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if this:IsChecked() then
+							UrAlarmGUIHourly:Disable()
+							UrAlarmGUIHourly:SetChecked(true)
+						else
+							UrAlarmGUIHourly:Enable()
+						end
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<Button name="$parentSave" inherits="UIPanelButtonTemplate" text="OBJ_SAVE">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-15" y="-10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="70" y="25"/>
+				</Size>
+				<Scripts>
+					<OnClick>
+						UrAlarm.Save()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				UrAlarm.GUIShow(this)
+			</OnShow>
+		</Scripts>
+	</Frame>
+</Ui>
